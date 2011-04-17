@@ -6,11 +6,6 @@ require 'net/ping'
 
 class IPScanner
 
-  def initialize(ip_base='192.168.1.')
-    @a = []
-    (1..254).each{|i| Thread.new {ip = ip_base + i.to_s; a << i if Net::Ping::TCP.new(ip, 'http').ping?}}
-  end
-  
   def self.run(ip_base='192.168.1.')
     a = []
     (1..254).each{|i| Thread.new {ip = ip_base + i.to_s; a << i if Net::Ping::TCP.new(ip, 'http').ping?}}
@@ -18,8 +13,4 @@ class IPScanner
   end
 
   def self.scan(ip_base='192.168.1.') self.run  end
-    
-  def to_a()
-    @a.sort.map{|x| ip_base + x.to_s}        
-  end
 end
