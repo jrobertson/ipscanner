@@ -11,7 +11,7 @@ class IPScanner
     a = []
     (range).map{|i| Thread.new {a << i if pingecho(ip_base+i.to_s, t) }}.join
     sleep t + 0.25
-    a.map{|x| ip_base + x.to_s}
+    a.sort.map{|x| ip_base + x.to_s}
   end
       
   def self.pingecho(host, timeout=5, service="echo")

@@ -3,6 +3,7 @@
 # file: ipscanner.rb
 
 require 'socket'
+require 'timeout'
 
 class IPScanner
   
@@ -16,8 +17,8 @@ class IPScanner
   def self.pingecho(host, timeout=5, service="echo")
     begin
       timeout(timeout) do
-	s = TCPSocket.new(host, service)
-	s.close
+      s = TCPSocket.new(host, service)
+      s.close
       end
     rescue Errno::ECONNREFUSED
       return true

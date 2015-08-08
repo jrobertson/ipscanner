@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'ipscanner'
-  s.version = '0.1.10'
+  s.version = '0.1.11'
   s.summary = 'ipscanner'
   s.authors = ['James Robertson']
   s.description = "Ping every address on a IPV4 Subnet e.g. 192.168.1.x"
@@ -10,4 +10,5 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
   s.email = 'james@r0bertson.co.uk'
   s.homepage = 'https://github.com/jrobertson/ipscanner'
+  s.required_ruby_version = '>= 2.1.2'
 end
