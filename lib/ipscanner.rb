@@ -7,7 +7,9 @@ require 'timeout'
 
 class IPScanner
   
-  def self.detect_new(ip_base='192.168.1.')
+  def self.detect_new(ip_base=nil)
+    
+    ip_base = local_ip.ip_address[/\d+\.\d+\.\d+\./] unless ip_base
     
     puts "scanning the network (#{ip_base}x)"
 
@@ -43,10 +45,18 @@ class IPScanner
     
   end
   
-  def self.scan(ip_base='192.168.1.', range=1..254, t=1)
+  def self.local_ip()
+    Socket.ip_address_list.find { |ai| ai.ipv4? && !ai.ipv4_loopback? }
+  end
+  
+  def self.scan(ip_base=nil, range=1..254, t=1)
+    
+    ip_base = local_ip.ip_address[/\d+\.\d+\.\d+\./] unless ip_base    
+    
     a = []
     (range).map{|i| Thread.new {a << i if pingecho(ip_base+i.to_s, t) }}.join
     sleep t + 0.25
+    
     a.sort.map{|x| ip_base + x.to_s}
   end
       
