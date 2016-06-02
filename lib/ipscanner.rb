@@ -62,7 +62,7 @@ class IPScanner
       
   def self.pingecho(host, timeout=5, service="echo")
     begin
-      timeout(timeout) do
+      Timeout.timeout(timeout) do
       s = TCPSocket.new(host, service)
       s.close
       end
