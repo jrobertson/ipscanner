@@ -45,6 +45,28 @@ class IPScanner
     
   end
   
+  def self.autodetect_new(ip_base=nil, lapse: 30, &blk)        
+    
+    ip_base = local_ip.ip_address[/\d+\.\d+\.\d+\./] unless ip_base
+    
+    puts "scanning the network (#{ip_base}x)"
+
+    a1 = scan ip_base
+    puts "found %d IP addresses" % a1.length
+    
+    
+    loop do
+      
+      sleep lapse
+      a2 = scan ip_base
+      found = a2 - a1
+      blk.call(found) if found.any?
+      a1 = a2
+
+    end
+    
+  end
+  
   def self.local_ip()
     Socket.ip_address_list.find { |ai| ai.ipv4? && !ai.ipv4_loopback? }
   end

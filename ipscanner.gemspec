@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = 'ipscanner'
-  s.version = '0.2.2'
+  s.version = '0.3.0'
   s.summary = 'ipscanner'
   s.authors = ['James Robertson']
   s.description = "Ping every address on a IPV4 Subnet e.g. 192.168.1.x"
-  s.files = Dir['lib/**/*.rb'] 
+  s.files = Dir['lib/ipscanner.rb'] 
   s.signing_key = '../privatekeys/ipscanner.pem'
   s.cert_chain  = ['gem-public_cert.pem']
   s.license = 'MIT'
